@@ -28,13 +28,12 @@ if __name__ == '__main__':
 	Path(output_dir).mkdir(exist_ok=True)
 
 	for f in os.listdir(current_dir):
-		if not os.path.isfile(os.path.join(current_dir, f)):
-			continue
-		name, ext = os.path.splitext(f)
-		ext = ext[1:]
-		fpath = os.path.join(current_dir, f)
-		ext_output_dir = os.path.join(output_dir, ext, '')
-		if not ext:
-			ext_output_dir = os.path.join(output_dir, args.default_dir, '')
-		Path(ext_output_dir).mkdir(exist_ok=True)
-		shutil.move(fpath, ext_output_dir)
+		if os.path.isfile(os.path.join(current_dir, f)):
+			name, ext = os.path.splitext(f)
+			ext = ext[1:]
+			fpath = os.path.join(current_dir, f)
+			ext_output_dir = os.path.join(output_dir, ext, '')
+			if not ext:
+				ext_output_dir = os.path.join(output_dir, args.default_dir, '')
+			Path(ext_output_dir).mkdir(exist_ok=True)
+			shutil.move(fpath, ext_output_dir)
